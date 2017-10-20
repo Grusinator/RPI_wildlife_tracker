@@ -1,4 +1,3 @@
-
 #from gpiozero import MotionSensor
 import logging
 from datetime import datetime
@@ -50,13 +49,13 @@ while True:
         logging.info('Attempting to save image')
 
         if os.path.isdir('mnt/usb1/videos'):
-        	logging.info('Saving to /mnt/usb1/videos/')
+            logging.info('Saving to /mnt/usb1/videos/')
             output_video = "/mnt/usb1/videos/{}.mp4".format(timestamp)
         elif os.path.isdir('mnt/usb2/videos'):
-        	logging.info('Saving to /mnt/usb2/videos/')
+            logging.info('Saving to /mnt/usb2/videos/')
             output_video = "/mnt/usb2/videos/{}.mp4".format(timestamp)
         else:
-        	logging.info('Saving to /home/pi/videos/')
+            logging.info('Saving to /home/pi/videos/')
             output_video = "/home/pi/videos/{}.mp4".format(timestamp)
 
         call(["MP4Box", "-add", input_video, output_video])
