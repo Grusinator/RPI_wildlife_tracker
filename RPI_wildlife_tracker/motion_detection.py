@@ -30,6 +30,16 @@ def captureTestImage():
     imageData.close()
     return im, buffer
 
+def captureTestImage():
+    command = "raspistill -w %s -h %s -t 0 -e bmp -o -" % (100, 75)
+    imageData = StringIO()
+    imageData.write(subprocess.check_output(command, shell=True))
+    imageData.seek(0)
+    im = Image.open(imageData)
+    buffer = im.load()
+    imageData.close()
+    return im, buffer
+
 # Capture a small test image (for motion detection)
 def captureFullImage():
     command = "raspistill -w %s -h %s -t 0 -e bmp -o -" % (100, 75)
@@ -77,6 +87,15 @@ def testHasChanged(image1, image2, buffer1,buffer2, sensitivity=20, threshold=10
 
     return changedPixels > sensitivity
 
+
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
     print("motion detection demo!")
     # Get first image
@@ -112,3 +131,5 @@ if __name__ == "__main__":
         # Swap comparison buffers
         image1 = image2
         buffer1 = buffer2
+
+
