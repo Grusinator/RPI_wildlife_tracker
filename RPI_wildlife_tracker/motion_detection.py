@@ -1,4 +1,4 @@
-from io import StringIO
+from io import StringIO 
 import subprocess
 import os
 import time
@@ -22,7 +22,7 @@ diskSpaceToReserve = 40 * 1024 * 1024 # Keep 40 mb free on disk
 # Capture a small test image (for motion detection)
 def captureTestImage():
     command = "raspistill -w %s -h %s -t 0 -e bmp -o -" % (100, 75)
-    imageData = StringIO.StringIO()
+    imageData = StringIO()
     imageData.write(subprocess.check_output(command, shell=True))
     imageData.seek(0)
     im = Image.open(imageData)
@@ -33,7 +33,7 @@ def captureTestImage():
 # Capture a small test image (for motion detection)
 def captureFullImage():
     command = "raspistill -w %s -h %s -t 0 -e bmp -o -" % (100, 75)
-    imageData = StringIO.StringIO()
+    imageData = StringIO()
     imageData.write(subprocess.check_output(command, shell=True))
     imageData.seek(0)
     im = Image.open(imageData)
