@@ -10,10 +10,10 @@ from motion_detection import captureTestImage, testHasChanged
 data_path = '/home/pi/wildlife_tracker_data/'
 images_path = datapath + 'images/' 
 logs_path = data_path + 'logs/'
-if !os.path.exists(data_path):
+if not os.path.exists(data_path):
     os.mkdir(data_path)
 
-if !os.path.exists(images_path):
+if not os.path.exists(images_path):
     os.mkdir(images_path)
 
 
