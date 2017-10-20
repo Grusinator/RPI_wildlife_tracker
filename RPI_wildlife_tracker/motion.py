@@ -31,7 +31,7 @@ def detect_motion(camera):
         diff_image = ImageChops.difference(prior_image,current_image)
 
         value = image_entropy(diff_image)
-        print("{}value)
+        print('%.2f' %value)
         # Once motion detection is done, make the prior image the current
         prior_image = current_image
 
