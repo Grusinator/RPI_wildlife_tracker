@@ -1,6 +1,7 @@
 import io
 from PIL import Image, ImageChops
 import picamera
+import math
 
 prior_image = None
 
