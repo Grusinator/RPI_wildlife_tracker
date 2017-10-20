@@ -30,6 +30,8 @@ logging.basicConfig(filename=logfile, level=logging.DEBUG,
 print('Starting')
 logging.info('Starting')
 
+print("test")
+
 # Wait an initial duration to allow PIR and Camera to settle
 time.sleep(2)
 
