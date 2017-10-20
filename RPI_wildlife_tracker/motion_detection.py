@@ -1,4 +1,4 @@
-import StringIO
+from io import StringIO
 import subprocess
 import os
 import time
