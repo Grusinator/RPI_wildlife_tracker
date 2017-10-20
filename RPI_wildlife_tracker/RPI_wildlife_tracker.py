@@ -37,7 +37,8 @@ time.sleep(2)
 
 image1, buffer1 = captureTestImage()
 
-print(image1.shape)
+print(image1.size)
+print("test2")
 
 # Reset last capture time
 lastCapture = time.time()
