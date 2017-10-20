@@ -28,6 +28,10 @@ with picamera.PiCamera() as camera:
     camera.start_recording(stream, format='h264')
     try:
         while True:
+            if detect_motion(camera):
+                print("detection found")
+                continue
+
             camera.wait_recording(1)
             if detect_motion(camera):
                 print('Motion detected!')
