@@ -1,7 +1,6 @@
 import io
-import random
+from PIL import Image, ImageChops
 import picamera
-from PIL import Image
 
 prior_image = None
 
