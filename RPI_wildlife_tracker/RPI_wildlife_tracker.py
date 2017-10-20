@@ -18,7 +18,7 @@ def createIfNotExists(path):
 
 paths_list = [data_path, images_path, logs_path]
 
-createIfNotExists(path) for path in paths_list
+[createIfNotExists(path) for path in paths_list]
 
 
 logfile = logs_path + "/wildlife_tracker_log-"+str(datetime.now().strftime("%Y%m%d-%H%M"))+".csv"
