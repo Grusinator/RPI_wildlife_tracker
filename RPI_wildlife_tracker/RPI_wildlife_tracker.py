@@ -55,11 +55,11 @@ while True:
         print('Taking photo')
         ts = '{:%Y%m%d-%H%M%S}'.format(datetime.now())
         logging.info('Taking photo: '+ str(ts)+'.jpg')
-        with picamera.PiCamera() as cam:
-            cam.resolution=(1024,768)
-            filename = images_path + ts + '.jpg'
+        #with picamera.PiCamera() as cam:
+            #cam.resolution=(1024,768)
+        filename = images_path + ts + '.jpg'
 
-            saveImage(filename,600,480, 1*10**9) #1 gigabyte
+        saveImage(filename,600,480, 1*10**9) #1 gigabyte
             #cam.capture(filename)
            
 
