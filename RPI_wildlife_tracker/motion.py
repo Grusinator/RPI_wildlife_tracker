@@ -5,6 +5,15 @@ from PIL import Image
 
 prior_image = None
 
+
+def image_entropy(img):
+    """calculate the entropy of an image"""
+    # this could be made more efficient using numpy
+    histogram = img.histogram()
+    histogram_length = sum(histogram)
+    samples_probability = [float(h) / histogram_length for h in histogram]
+    return -sum([p * math.log(p, 2) for p in samples_probability if p != 0])
+
 def detect_motion(camera):
     global prior_image
     stream = io.BytesIO()
@@ -17,10 +26,15 @@ def detect_motion(camera):
         current_image = Image.open(stream)
         # Compare current_image to prior_image to detect motion. This is
         # left as an exercise for the reader!
-        result = random.randint(0, 10) == 0
+
+        diff_image = ImageChops.difference(img1,img1)
+
+        value = image_entropy(diff_image)
+        print(value)
         # Once motion detection is done, make the prior image the current
         prior_image = current_image
-        return result
+
+        return value > 5
 
 with picamera.PiCamera() as camera:
     camera.resolution = (1280, 720)
