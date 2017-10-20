@@ -35,10 +35,12 @@ def detect_motion(camera):
         # Once motion detection is done, make the prior image the current
         prior_image = current_image
 
-        if prior_detect:
-            return value > 5
+        if prior_detect && value > 5 || value > 6:
+            prior_detect = True
+            return True
         else:
-            return value > 6
+            prior_detect = False
+            return False
 
 with picamera.PiCamera() as camera:
     camera.resolution = (1280, 720)
