@@ -4,6 +4,7 @@ import picamera
 import math
 
 prior_image = None
+prior_detect = False
 
 
 def image_entropy(img):
@@ -30,11 +31,14 @@ def detect_motion(camera):
         diff_image = ImageChops.difference(prior_image,current_image)
 
         value = image_entropy(diff_image)
-        print(value)
+        print("{}value)
         # Once motion detection is done, make the prior image the current
         prior_image = current_image
 
-        return value > 6
+        if prior_detect:
+            return value > 5
+        else:
+            return value > 6
 
 with picamera.PiCamera() as camera:
     camera.resolution = (1280, 720)
