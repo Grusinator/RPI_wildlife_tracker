@@ -46,7 +46,7 @@ while True:
     image2, buffer2 = captureTestImage()
 
     #test for motions
-    if 0:#testHasChanged(image1, image2, buffer1, buffer2):
+    if 1:#testHasChanged(image1, image2, buffer1, buffer2):
 
         #pir.wait_for_motion()
         logging.info('Motion detected')
