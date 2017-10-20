@@ -78,7 +78,7 @@ def testHasChanged(image1, image2, buffer1,buffer2, sensitivity=20, threshold=10
 
     return changedPixels > sensitivity
 
-if __name__ == __main__:
+if __name__ == "__main__":
     # Get first image
     image1, buffer1 = captureTestImage()
 
