@@ -11,7 +11,7 @@ logging.basicConfig(filename=logfile, level=logging.DEBUG,
     format='%(asctime)s %(message)s',
     datefmt='%Y-%m-%d, %H:%M:%S,')
 
-pir = MotionSensor(17)
+#pir = MotionSensor(17)
 
 print('Starting')
 logging.info('Starting')
