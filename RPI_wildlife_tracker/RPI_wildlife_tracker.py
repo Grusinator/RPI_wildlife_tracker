@@ -5,7 +5,7 @@ from subprocess import call
 import picamera
 import time
 import os
-from motion_detection import captureTestImage, testHasChanged
+from motion_detection import captureTestImage, testHasChanged, saveImage
 
 data_path = '/home/pi/wildlife_tracker_data/'
 images_path = data_path + 'images/' 
@@ -35,8 +35,6 @@ time.sleep(2)
 
 image1, buffer1 = captureTestImage()
 
-image1, buffer1 = captureTestImage()
-
 # Reset last capture time
 lastCapture = time.time()
 
@@ -60,7 +58,9 @@ while True:
         with picamera.PiCamera() as cam:
             cam.resolution=(1024,768)
             filename = images_path + ts + '.jpg'
-            cam.capture(filename)
+
+            saveImage(filename,600,480, 1*10**9) #1 gigabyte
+            #cam.capture(filename)
            
 
         #print('Motion Ended')
