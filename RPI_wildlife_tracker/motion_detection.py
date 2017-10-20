@@ -47,7 +47,7 @@ def saveImage(width, height, diskSpaceToReserve):
     time = datetime.now()
     filename = "capture-%04d%02d%02d-%02d%02d%02d.jpg" % (time.year, time.month, time.day, time.hour, time.minute, time.second)
     subprocess.call("raspistill -w 1296 -h 972 -t 0 -e jpg -q 15 -o %s" % filename, shell=True)
-    print "Captured %s" % filename
+    print( "Captured %s" % filename)
 
 # Keep free space above given level
 def keepDiskSpaceFree(bytesToReserve):
@@ -55,7 +55,7 @@ def keepDiskSpaceFree(bytesToReserve):
         for filename in sorted(os.listdir(".")):
             if filename.startswith("capture") and filename.endswith(".jpg"):
                 os.remove(filename)
-                print "Deleted %s to avoid filling disk" % filename
+                print( "Deleted %s to avoid filling disk" % filename)
                 if (getFreeSpace() > bytesToReserve):
                     return
 
