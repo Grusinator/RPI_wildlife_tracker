@@ -34,7 +34,7 @@ def detect_motion(camera):
         # Once motion detection is done, make the prior image the current
         prior_image = current_image
 
-        return value > 5
+        return value > 6
 
 with picamera.PiCamera() as camera:
     camera.resolution = (1280, 720)
@@ -42,10 +42,6 @@ with picamera.PiCamera() as camera:
     camera.start_recording(stream, format='h264')
     try:
         while True:
-            if detect_motion(camera):
-                print("detection found")
-                continue
-
             camera.wait_recording(1)
             if detect_motion(camera):
                 print('Motion detected!')
