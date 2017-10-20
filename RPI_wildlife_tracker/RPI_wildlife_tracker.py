@@ -10,11 +10,15 @@ from motion_detection import captureTestImage, testHasChanged
 data_path = '/home/pi/wildlife_tracker_data/'
 images_path = data_path + 'images/' 
 logs_path = data_path + 'logs/'
-if not os.path.exists(data_path):
-    os.mkdir(data_path)
 
-if not os.path.exists(images_path):
-    os.mkdir(images_path)
+def createIfNotExists(path):
+    if not os.path.exists(data_path):
+        os.mkdir(data_path)
+        print("created path: "+ data_path)
+
+paths_list = [data_path, images_path, logs_path]
+
+createIfNotExists(path) for path in paths_list
 
 
 logfile = logs_path + "/wildlife_tracker_log-"+str(datetime.now().strftime("%Y%m%d-%H%M"))+".csv"
