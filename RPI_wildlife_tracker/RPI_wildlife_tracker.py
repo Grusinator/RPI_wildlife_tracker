@@ -2,10 +2,15 @@
 import logging
 from datetime import datetime
 from subprocess import call
-import picamera
+try:
+    import picamera
+except:
+    print("not on rpi")
+
 import time
 import os
 from motion_detection import captureTestImage, testHasChanged, saveImage
+from rest_client import ImageRestClient
 
 data_path = '/home/pi/wildlife_tracker_data/'
 images_path = data_path + 'images/' 
@@ -43,6 +48,8 @@ print("test2")
 # Reset last capture time
 lastCapture = time.time()
 
+rc = ImageRestClient("http://192.168.1.136")
+
 #main loop
 while True:    
     time.sleep(2)
@@ -66,6 +73,9 @@ while True:
 
         saveImage(filename,600,480, 1*10**9) #1 gigabyte
             #cam.capture(filename)
+
+        
+        rc.upload_image(filename, title=ts)
            
 
         #print('Motion Ended')
