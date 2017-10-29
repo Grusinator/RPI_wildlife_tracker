@@ -33,7 +33,7 @@ logging.basicConfig(filename=logfile, level=logging.DEBUG,
 
 
 print('Starting')
-logging.info('Starting')
+# logging.info('Starting')
 
 print("test")
 
@@ -42,13 +42,13 @@ time.sleep(2)
 
 image1, buffer1 = captureTestImage()
 
-print(image1.size)
-print("test2")
+# print(image1.size)
+# print("test2")
 
 # Reset last capture time
 lastCapture = time.time()
 
-rc = ImageRestClient("http://192.168.1.136")
+# rc = ImageRestClient("http://192.168.1.136")
 
 #main loop
 while True:    
@@ -75,7 +75,7 @@ while True:
             #cam.capture(filename)
 
         
-        rc.upload_image(filename, title=ts)
+        # rc.upload_image(filename, title=ts)
            
 
         #print('Motion Ended')
