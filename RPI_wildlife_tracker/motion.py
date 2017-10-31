@@ -22,7 +22,8 @@ def detect_motion(camera, prior_image = None, prior_detect = False):
     stream.seek(0)
     if prior_image is None:
         prior_image = Image.open(stream)
-        return False
+        prior_detect = False
+        return prior_image, prior_detect
     else:
         current_image = Image.open(stream)
         # Compare current_image to prior_image to detect motion. This is
