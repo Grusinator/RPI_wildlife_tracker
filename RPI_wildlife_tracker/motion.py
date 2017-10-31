@@ -36,7 +36,8 @@ def detect_motion(camera, prior_image = None, prior_detect = False):
         # Once motion detection is done, make the prior image the current
         prior_image = current_image
 
-        if prior_detect & value > 5 | value > 6:
+        # if detection occured in frame before, the threshold is not as high.
+        if prior_detect & (value > 5) | (value > 6):
             prior_detect = True
             return prior_image, prior_detect
         else:
