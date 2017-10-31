@@ -1,7 +1,10 @@
 import io
+import os
 from PIL import Image, ImageChops
 import picamera
 import math
+import datetime
+from rest_client import ImageRestClient
 
 
 
@@ -49,6 +52,10 @@ def motion_detection():
     prior_image = None
     prior_detect = False
 
+    output_path = "/home/pi/wildlife_tracker_data/"
+
+    rest = ImageRestClient("192.168.1.136")
+
     with picamera.PiCamera() as camera:
         camera.resolution = (1280, 720)
         stream = picamera.PiCameraCircularIO(camera, seconds=10)
@@ -72,9 +79,12 @@ def motion_detection():
                     stream.clear()
                     # Wait until motion is no longer detected, then split
                     # recording back to the in-memory circular buffer
+                    image_fn = "img_" + str(datetime.datetime.now()) + ".jpg"
 
-                    if detect_motion(camera):
-                        print("motion detected.. upload image here")
+                    image_path = os.path.join(output_path, image_fn)
+                    prior_image.save(image_path)
+                    print("motion detected.. upload image here")
+                    rest.upload_image(image_path, os.path.basename(image_fn), "PI upload")
 
                     # as long as the image keep changing keep the loop on 
                     while prior_detect:
