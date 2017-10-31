@@ -17,7 +17,6 @@ def image_entropy(img):
 
 
 def detect_motion(camera, prior_image = None, prior_detect = False):
-    global prior_image
     stream = io.BytesIO()
     camera.capture(stream, format='jpeg', use_video_port=True)
     stream.seek(0)
