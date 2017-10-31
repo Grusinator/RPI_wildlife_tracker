@@ -42,26 +42,33 @@ def detect_motion(camera):
             prior_detect = False
             return False
 
-with picamera.PiCamera() as camera:
-    camera.resolution = (1280, 720)
-    stream = picamera.PiCameraCircularIO(camera, seconds=10)
-    camera.start_recording(stream, format='h264')
-    try:
-        while True:
-            camera.wait_recording(1)
-            if detect_motion(camera):
-                print('Motion detected!')
-                # As soon as we detect motion, split the recording to
-                # record the frames "after" motion
-                camera.split_recording('after.h264')
-                # Write the 10 seconds "before" motion to disk as well
-                stream.copy_to('before.h264', seconds=10)
-                stream.clear()
-                # Wait until motion is no longer detected, then split
-                # recording back to the in-memory circular buffer
-                while detect_motion(camera):
-                    camera.wait_recording(1)
-                print('Motion stopped!')
-                camera.split_recording(stream)
-    finally:
-        camera.stop_recording()
+def motion_detection():
+    with picamera.PiCamera() as camera:
+        camera.resolution = (1280, 720)
+        stream = picamera.PiCameraCircularIO(camera, seconds=10)
+        camera.start_recording(stream, format='h264')
+        try:
+            while True:
+                camera.wait_recording(1)
+                print(".")
+                if detect_motion(camera):
+                    print('Motion detected!')
+                    # As soon as we detect motion, split the recording to
+                    # record the frames "after" motion
+                    camera.split_recording('after.h264')
+                    # Write the 10 seconds "before" motion to disk as well
+                    stream.copy_to('before.h264', seconds=10)
+                    stream.clear()
+                    # Wait until motion is no longer detected, then split
+                    # recording back to the in-memory circular buffer
+                    while detect_motion(camera):
+                        camera.wait_recording(1)
+                    if detect_motion(camera):
+                        print("motion detected.. upload image here")
+                    print('Motion stopped!')
+                    camera.split_recording(stream)
+        finally:
+            camera.stop_recording()
+
+if __name__ == "__main__":
+    motion_detection()

@@ -23,6 +23,8 @@
     <Compile Include="module1.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="motion.py" />
+    <Compile Include="motion_detection.py" />
     <Compile Include="rest_client.py">
       <SubType>Code</SubType>
     </Compile>
