@@ -54,7 +54,7 @@ def motion_detection():
 
     output_path = "/home/pi/wildlife_tracker_data/"
 
-    rest = ImageRestClient("192.168.1.136")
+    rest = ImageRestClient("192.168.1.136:8000")
 
     with picamera.PiCamera() as camera:
         camera.resolution = (1280, 720)
