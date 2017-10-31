@@ -37,10 +37,10 @@ def detect_motion(camera, prior_image = None, prior_detect = False):
 
         if prior_detect & value > 5 | value > 6:
             prior_detect = True
-            return True
+            return prior_image, prior_detect
         else:
             prior_detect = False
-            return False
+            return prior_image, prior_detect
 
 
 def motion_detection():
