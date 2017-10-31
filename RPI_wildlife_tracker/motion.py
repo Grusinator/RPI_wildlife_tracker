@@ -3,8 +3,7 @@ from PIL import Image, ImageChops
 import picamera
 import math
 
-prior_image = None
-prior_detect = False
+
 
 
 def image_entropy(img):
@@ -15,7 +14,9 @@ def image_entropy(img):
     samples_probability = [float(h) / histogram_length for h in histogram]
     return -sum([p * math.log(p, 2) for p in samples_probability if p != 0])
 
-def detect_motion(camera):
+
+
+def detect_motion(camera, prior_image = None, prior_detect = False):
     global prior_image
     stream = io.BytesIO()
     camera.capture(stream, format='jpeg', use_video_port=True)
@@ -42,7 +43,11 @@ def detect_motion(camera):
             prior_detect = False
             return False
 
+
 def motion_detection():
+    prior_image = None
+    prior_detect = False
+
     with picamera.PiCamera() as camera:
         camera.resolution = (1280, 720)
         stream = picamera.PiCameraCircularIO(camera, seconds=10)
@@ -51,7 +56,12 @@ def motion_detection():
             while True:
                 camera.wait_recording(1)
                 print(".")
-                if detect_motion(camera):
+
+                # compare image with previous image
+                prior_image, prior_detect = detect_motion(camera, prior_image, prior_detect)
+
+                # if change was found
+                if prior_detect:
                     print('Motion detected!')
                     # As soon as we detect motion, split the recording to
                     # record the frames "after" motion
@@ -61,10 +71,16 @@ def motion_detection():
                     stream.clear()
                     # Wait until motion is no longer detected, then split
                     # recording back to the in-memory circular buffer
-                    while detect_motion(camera):
-                        camera.wait_recording(1)
+
                     if detect_motion(camera):
                         print("motion detected.. upload image here")
+
+                    # as long as the image keep changing keep the loop on 
+                    while prior_detect:
+                        camera.wait_recording(1)
+                        prior_image, prior_detect = detect_motion(camera, prior_image, prior_detect)
+                        
+                    
                     print('Motion stopped!')
                     camera.split_recording(stream)
         finally:
