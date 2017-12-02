@@ -89,13 +89,6 @@ def testHasChanged(image1, image2, buffer1,buffer2, sensitivity=20, threshold=10
 
 
 
-
-
-
-
-
-
-
 if __name__ == "__main__":
     print("motion detection demo!")
     # Get first image
