@@ -52,13 +52,13 @@ def detect_motion(camera, prior_image = None, prior_detect = False):
             return prior_image, prior_detect
 
 
-def motion_detection(no_upload=False):
+def motion_detection(server="http://192.168.10.136:8000", no_upload=False):
     prior_image = None
     prior_detect = False
 
     output_path = "/home/pi/wildlife_tracker_data/"
     if not no_upload:
-        rest = ImageRestClient("http://192.168.10.136:8000")
+        rest = ImageRestClient(server)
 
     with picamera.PiCamera() as camera:
         camera.resolution = (1280, 720)
@@ -106,6 +106,11 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--no_upload", help="select to not upload to server", action='store_true')
+    parser.add_argument("--server", help="select server")
     args = parser.parse_args()
 
-    motion_detection(no_upload=args.no_upload)
+    if args.server:
+        server = args.server
+
+
+    motion_detection(server=args.server, no_upload=args.no_upload)
