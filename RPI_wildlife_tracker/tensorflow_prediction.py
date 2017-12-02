@@ -64,7 +64,7 @@ def load_labels(label_file):
         label.append(l.rstrip())
     return label
 
-def predict_image(image, graph, input_height=224, input_width=224,
+def predict_image(file_name, graph, input_height=224, input_width=224,
     input_mean=128, input_std=128, label_file="output_labels.txt",
     input_layer="input", output_layer="final_result"):  
     
@@ -80,14 +80,14 @@ def predict_image(image, graph, input_height=224, input_width=224,
     output_operation = graph.get_operation_by_name(output_name);
 
     with tf.Session(graph=graph) as sess:
-    results = sess.run(output_operation.outputs[0],
-                        {input_operation.outputs[0]: t})
+        results = sess.run(output_operation.outputs[0],
+                            {input_operation.outputs[0]: t})
     results = np.squeeze(results)
 
     top_k = results.argsort()[-5:][::-1]
     labels = load_labels(label_file)
     for i in top_k:
-    print(labels[i], results[i])
+        print(labels[i], results[i])
 
     return [(labels[i], results[i]) for i in top_k]
 
