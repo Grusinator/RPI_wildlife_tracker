@@ -1,7 +1,11 @@
 import io
 import os
 from PIL import Image, ImageChops
-import picamera
+import argparse
+try:
+    import picamera
+except:
+    print("not on pi")
 import math
 import datetime
 from rest_client import ImageRestClient
@@ -48,13 +52,13 @@ def detect_motion(camera, prior_image = None, prior_detect = False):
             return prior_image, prior_detect
 
 
-def motion_detection():
+def motion_detection(no_upload=False):
     prior_image = None
     prior_detect = False
 
     output_path = "/home/pi/wildlife_tracker_data/"
-
-    rest = ImageRestClient("http://192.168.10.136:8000")
+    if not no_upload:
+        rest = ImageRestClient("http://192.168.10.136:8000")
 
     with picamera.PiCamera() as camera:
         camera.resolution = (1280, 720)
@@ -83,8 +87,9 @@ def motion_detection():
 
                     image_path = os.path.join(output_path, image_fn)
                     prior_image.save(image_path)
-                    print("motion detected.. upload image here")
-                    rest.upload_image(image_path, os.path.basename(image_fn), "PI upload")
+                    if not no_upload:
+                        print("motion detected.. upload image here")
+                        rest.upload_image(image_path, os.path.basename(image_fn), "PI upload")
 
                     # as long as the image keep changing keep the loop on 
                     while prior_detect:
@@ -98,4 +103,9 @@ def motion_detection():
             camera.stop_recording()
 
 if __name__ == "__main__":
-    motion_detection()
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--no_upload", help="select to not upload to server", action='store_true')
+    args = parser.parse_args()
+
+    motion_detection(no_upload=args.no_upload)
