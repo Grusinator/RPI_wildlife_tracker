@@ -122,7 +122,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.server:
-        server = args.server
-
-
-    motion_detection(server=args.server, no_upload=args.no_upload)
+        motion_detection(server=args.server, no_upload=args.no_upload)
+    else:
+        motion_detection(no_upload=args.no_upload)
