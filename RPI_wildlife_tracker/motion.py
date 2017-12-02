@@ -98,7 +98,10 @@ def motion_detection(server="http://192.168.10.136:8000", no_upload=False):
 
                     if not no_upload:
                         print("motion detected.. upload image here")
-                        rest.upload_image(image_path, os.path.basename(image_fn), "PI upload", desc=predict[0][0] + "_" + predict[0][1])
+                        rest.upload_image(
+                            image_path, 
+                            title=os.path.basename(image_path), 
+                            desc=predict[0][0] + "_" + str(predict[0][1]))
 
                     # as long as the image keep changing keep the loop on 
                     while prior_detect:

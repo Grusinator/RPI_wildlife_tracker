@@ -16,7 +16,7 @@ class ImageRestClient():
 
         values = {
             "title": title,
-            "decription": desc,
+            "description": desc,
         }
         try:
             requests.post(url,  data=values, files=files)
