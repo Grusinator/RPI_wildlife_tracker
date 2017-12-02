@@ -2,14 +2,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>fc69d50f-74b7-42d8-9577-87e11992d846</ProjectGuid>
+    <ProjectGuid>e0c26bc4-4926-4dea-b458-e7a542cd1e62</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>module1.py</StartupFile>
-    <SearchPath>..\RPI_wildlife_tracker</SearchPath>
+    <StartupFile>image_classification.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>RPI_wildlife_tracker</Name>
-    <RootNamespace>RPI_wildlife_tracker</RootNamespace>
+    <Name>image_classification</Name>
+    <RootNamespace>image_classification</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,21 +21,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="module1.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="motion.py" />
-    <Compile Include="motion_detection.py" />
-    <Compile Include="rest_client.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="rest_client_unit_test.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RPI_wildlife_tracker.py" />
-    <Compile Include="tensorflow_prediction.py">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="image_classification.py" />
+    <Compile Include="tensorflow_prediction.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

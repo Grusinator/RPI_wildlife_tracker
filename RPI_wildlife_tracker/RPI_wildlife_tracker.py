@@ -58,7 +58,7 @@ while True:
     image2, buffer2 = captureTestImage()
 
     #test for motions
-    if 1:#testHasChanged(image1, image2, buffer1, buffer2):
+    if testHasChanged(image1, image2, buffer1, buffer2):
 
         #pir.wait_for_motion()
         logging.info('Motion detected')
@@ -71,7 +71,7 @@ while True:
             #cam.resolution=(1024,768)
         filename = images_path + ts + '.jpg'
 
-        saveImage(filename,600,480, 1*10**9) #1 gigabyte
+        saveImage(filename,600,480, 1*10**9) #1 gigabyte diskspace to reserve
             #cam.capture(filename)
 
         
