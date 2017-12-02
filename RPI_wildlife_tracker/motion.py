@@ -9,6 +9,7 @@ except:
 import math
 import datetime
 from rest_client import ImageRestClient
+from tensorflow_prediction import predict_image, load_graph
 
 
 
@@ -60,6 +61,8 @@ def motion_detection(server="http://192.168.10.136:8000", no_upload=False):
     if not no_upload:
         rest = ImageRestClient(server)
 
+    graph = load_graph("output_graph.pb")
+
     with picamera.PiCamera() as camera:
         camera.resolution = (1280, 720)
         stream = picamera.PiCameraCircularIO(camera, seconds=10)
@@ -87,6 +90,12 @@ def motion_detection(server="http://192.168.10.136:8000", no_upload=False):
 
                     image_path = os.path.join(output_path, image_fn)
                     prior_image.save(image_path)
+
+                    #predict
+                    predict = predict_image(image_path, graph)
+                    print(predict)
+
+
                     if not no_upload:
                         print("motion detected.. upload image here")
                         rest.upload_image(image_path, os.path.basename(image_fn), "PI upload")

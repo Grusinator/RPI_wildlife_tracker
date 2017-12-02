@@ -65,7 +65,8 @@ def load_labels(label_file):
     return label
 
 def predict_image(image, graph, input_height=224, input_width=224,
-    input_mean=128, input_std=128, input_layer="input", output_layer="final_result"):  
+    input_mean=128, input_std=128, label_file="output_labels.txt",
+    input_layer="input", output_layer="final_result"):  
     
     t = read_tensor_from_image_file(file_name,
                                     input_height=input_height,

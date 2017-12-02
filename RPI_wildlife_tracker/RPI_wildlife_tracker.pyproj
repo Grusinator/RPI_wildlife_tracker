@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>fc69d50f-74b7-42d8-9577-87e11992d846</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>motion.py</StartupFile>
+    <StartupFile>rest_client_unit_test.py</StartupFile>
     <SearchPath>..\RPI_wildlife_tracker</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>

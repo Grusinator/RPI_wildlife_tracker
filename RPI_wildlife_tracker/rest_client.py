@@ -23,6 +23,8 @@ class ImageRestClient():
         except Exception as e:
             print("Error: Error in http request!")
             print(e)
+            return 1
+        return 0
 
     def login(self, username, password):
 
